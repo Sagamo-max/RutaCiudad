@@ -27,6 +27,7 @@ reglas = [
     ("Itagui", "Sabaneta", 2),
     ("Sabaneta", "LaEstrella", 3),
 
+    # Rutas Alternativas
     ("Acevedo", "Hospital", 6),
     ("SanAntonio", "Industriales", 4),
     ("Bello", "Acevedo", 5),
@@ -34,13 +35,27 @@ reglas = [
 ]
 
 heuristica = {
-    "Niquia": 20, "Bello": 18, "Madera": 17, "Acevedo": 15,
-    "Tricentenario": 14, "Caribe": 13, "Universidad": 12,
-    "Hospital": 11, "Prado": 10, "ParqueBerrio": 9,
-    "SanAntonio": 8, "Alpujarra": 7, "Exposiciones": 6,
-    "Industriales": 5, "Poblado": 4, "Aguacatala": 3,
-    "Ayura": 2, "Envigado": 1, "Itagui": 1,
-    "Sabaneta": 0, "LaEstrella": 0
+    "Niquia": 20, 
+    "Bello": 18, 
+    "Madera": 17, 
+    "Acevedo": 15,
+    "Tricentenario": 14, 
+    "Caribe": 13, 
+    "Universidad": 12,
+    "Hospital": 11, 
+    "Prado": 10, 
+    "ParqueBerrio": 9,
+    "SanAntonio": 8, 
+    "Alpujarra": 7, 
+    "Exposiciones": 6,
+    "Industriales": 5,
+    "Poblado": 4, 
+    "Aguacatala": 3,
+    "Ayura": 2, 
+    "Envigado": 1, 
+    "Itagui": 1,
+    "Sabaneta": 0, 
+    "LaEstrella": 0
 }
 
 # -----------------------------------
@@ -113,27 +128,44 @@ def calcular():
 # -----------------------------------
 ventana = tk.Tk()
 ventana.title("Sistema Inteligente de Transporte")
-ventana.geometry("500x400")
+ventana.geometry("650x550")
 
-tk.Label(ventana, text="Sistema de Rutas (A*)", font=("Arial", 16)).pack(pady=10)
+# Fuente general
+FUENTE_TITULO = ("Arial", 20, "bold")
+FUENTE = ("Arial", 14)
 
-tk.Label(ventana, text="Inicio:").pack()
-entry_inicio = tk.Entry(ventana)
-entry_inicio.pack()
+tk.Label(ventana, text="Sistema de Rutas Inteligente (A*)", font=FUENTE_TITULO).pack(pady=15)
 
-tk.Label(ventana, text="Destino:").pack()
-entry_fin = tk.Entry(ventana)
-entry_fin.pack()
+tk.Label(ventana, text="Estación de inicio:", font=FUENTE).pack(pady=5)
+entry_inicio = tk.Entry(ventana, font=FUENTE, width=30)
+entry_inicio.pack(pady=5)
 
-tk.Button(ventana, text="Calcular Ruta", command=calcular).pack(pady=10)
+tk.Label(ventana, text="Estación de destino:", font=FUENTE).pack(pady=5)
+entry_fin = tk.Entry(ventana, font=FUENTE, width=30)
+entry_fin.pack(pady=5)
+
+tk.Button(
+    ventana,
+    text="Calcular Ruta",
+    font=("Arial", 14, "bold"),
+    padx=10,
+    pady=5,
+    command=calcular
+).pack(pady=15)
 
 resultado_texto = tk.StringVar()
-tk.Label(ventana, textvariable=resultado_texto, wraplength=400).pack(pady=20)
+tk.Label(
+    ventana,
+    textvariable=resultado_texto,
+    font=FUENTE,
+    wraplength=500,
+    justify="center"
+).pack(pady=15)
 
-tk.Label(ventana, text="Estaciones disponibles:", font=("Arial", 10, "bold")).pack()
+tk.Label(ventana, text="Estaciones disponibles:", font=("Arial", 14, "bold")).pack(pady=5)
 
-lista = tk.Text(ventana, height=8)
-lista.pack()
+lista = tk.Text(ventana, height=10, font=("Arial", 12))
+lista.pack(pady=5)
 
 for e in sorted(estaciones):
     lista.insert(tk.END, e + "\n")
